@@ -1,0 +1,40 @@
+name: AXON Continuous Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Job 1: Build and Lint the Next.js Frontend
+  frontend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: cd apps/web && npm install
+      - name: Build Next.js
+        run: cd apps/web && npm run build
+
+  # Job 2: Test the Python AI Backend
+  backend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd apps/api
+          pip install -r requirements.txt
+      - name: Run Python Lint
+        run: |
+          pip install flake8
+          flake8 apps/api --count --select=E9,F63,F7,F82 --show-source --statistics
