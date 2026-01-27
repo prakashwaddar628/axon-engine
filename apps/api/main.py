@@ -43,3 +43,36 @@ async def generate_challenge(stats: UserStats):
     except Exception as e:
         print(f"AXON Error: {e}")
         raise HTTPException(status_code=500, detail="Gemini Engine Overloaded. Try again in 10 seconds.")
+    
+# Add this to your main.py
+
+@app.post("/tailor-resume")
+async def tailor_resume(job_description: str):
+    try:
+        # 1. In a real app, we'd fetch your master profile from packages/shared/master-profile.json
+        # For now, let's use a sample of your 'SentinAI' project
+        user_context = "Project SentinAI: Drone-based fire detection and women safety using YOLO and Python."
+
+        prompt = f"""
+        Act as a FAANG Technical Recruiter.
+        Job Description: {job_description}
+        My Experience: {user_context}
+        
+        Task: Rewrite the 'SentinAI' project description to perfectly match the JD.
+        - Use the STAR method (Situation, Task, Action, Result).
+        - Include metrics and hard skills mentioned in the JD.
+        - Ensure it is 100% ATS-readable.
+        Return ONLY the rewritten bullet points.
+        """
+
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt
+        )
+        return {"tailored_bullets": response.text}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/health")
+async def health_check():
+    return {"status": "API is healthy"}
