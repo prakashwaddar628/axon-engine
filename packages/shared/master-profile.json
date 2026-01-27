@@ -1,23 +1,36 @@
 {
   "identity": {
-    "name": "User",
-    "role": "AI & Data Science Student",
-    "focus": ["Computer Vision", "Full-stack Dev"]
+    "name": "AI Software Developer & Data Scientist",
+    "brand": "Laxpra",
+    "current_projects": ["BuzzerX", "SentinAI"]
   },
-  "experience": [
-    {
-      "id": "sentinai",
-      "name": "SentinAI",
-      "tech": ["YOLO", "Python", "Drones"]
-    },
+  "projects": [
     {
       "id": "buzzerx",
-      "name": "BuzzerX",
-      "tech": ["Next.js", "SQL", "Tailwind"]
+      "title": "BuzzerX - Skills-to-Jobs AI",
+      "achievement": "Microsoft Imagine Cup 2026 Entry",
+      "description": "AI-first coaching platform built on Azure. Uses skills-matching algorithms to bridge the gap between education and employment.",
+      "tech": ["Azure", "Python", "Next.js", "AI Matching"]
+    },
+    {
+      "id": "sentinai",
+      "title": "SentinAI - Urban Anomaly Detection",
+      "achievement": "Hyperspace Innovation Hackathon 2026",
+      "description": "Autonomous urban anomaly detection and response system focusing on fire detection and safety.",
+      "tech": ["Computer Vision", "YOLO", "FastAPI", "IoT"]
+    },
+    {
+      "id": "shruti-fotography",
+      "title": "Shruti Fotography Client Site",
+      "achievement": "First Laxpra Client Project",
+      "description": "Custom high-performance portfolio website with integrated booking and review systems.",
+      "tech": ["Next.js", "Tailwind CSS", "Booking API"]
+    },
+    {
+      "id": "laxpra-search",
+      "title": "Laxpra Universal Search API",
+      "description": "Scalable AI-powered vector search microservice designed for multi-tenant applications.",
+      "tech": ["FastAPI", "Vector DB", "Embeddings"]
     }
-  ],
-  "learning_stats": {
-    "current_streak": 0,
-    "last_completed_challenge": null
-  }
+  ]
 }
