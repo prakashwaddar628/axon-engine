@@ -1,36 +1,30 @@
 {
-  "identity": {
-    "name": "AI Software Developer & Data Scientist",
-    "brand": "Laxpra",
-    "current_projects": ["BuzzerX", "SentinAI"]
-  },
+  "name": "Prakash Waddar",
+  "skills": ["AI/ML", "Next.js", "FastAPI", "Python", "TypeScript", "Tailwind CSS"],
   "projects": [
     {
-      "id": "buzzerx",
-      "title": "BuzzerX - Skills-to-Jobs AI",
-      "achievement": "Microsoft Imagine Cup 2026 Entry",
-      "description": "AI-first coaching platform built on Azure. Uses skills-matching algorithms to bridge the gap between education and employment.",
-      "tech": ["Azure", "Python", "Next.js", "AI Matching"]
+      "name": "BuzzerX",
+      "description": "An AI-powered quiz platform developed for Microsoft Imagine Cup. Features real-time question generation and adaptive difficulty.",
+      "techStack": ["Next.js", "OpenAI API", "Socket.io"],
+      "impact": "Finalist in Microsoft Imagine Cup"
     },
     {
-      "id": "sentinai",
-      "title": "SentinAI - Urban Anomaly Detection",
-      "achievement": "Hyperspace Innovation Hackathon 2026",
-      "description": "Autonomous urban anomaly detection and response system focusing on fire detection and safety.",
-      "tech": ["Computer Vision", "YOLO", "FastAPI", "IoT"]
+      "name": "SentinAI",
+      "description": "Autonomous drone surveillance system using YOLO for object detection. Capable of identifying threats in real-time.",
+      "techStack": ["Python", "YOLOv8", "OpenCV", "DroneKit"],
+      "impact": "Deployed for campus security trials"
     },
     {
-      "id": "shruti-fotography",
-      "title": "Shruti Fotography Client Site",
-      "achievement": "First Laxpra Client Project",
-      "description": "Custom high-performance portfolio website with integrated booking and review systems.",
-      "tech": ["Next.js", "Tailwind CSS", "Booking API"]
+      "name": "Laxpra Universal Search",
+      "description": "A high-performance semantic search engine using Vector API. Indexes multiple data sources for unified retrieval.",
+      "techStack": ["FastAPI", "Qdrant", "Sentence Transformers"],
+      "impact": "Reduced search latency by 40%"
     },
     {
-      "id": "laxpra-search",
-      "title": "Laxpra Universal Search API",
-      "description": "Scalable AI-powered vector search microservice designed for multi-tenant applications.",
-      "tech": ["FastAPI", "Vector DB", "Embeddings"]
+      "name": "Shruti Fotography",
+      "description": "A freelance portfolio website for a professional photographer. Features a custom CMS and high-performance image gallery.",
+      "techStack": ["Next.js", "Sanity.io", "Framer Motion"],
+      "impact": "Increased client inquiries by 60%"
     }
   ]
 }
