@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import resume, challenge
+from routers import resume, challenge, engine
 import uvicorn
 import os
 
@@ -10,6 +10,8 @@ app = FastAPI(title="AXON Engine")
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
 ]
 
 app.add_middleware(
@@ -22,6 +24,7 @@ app.add_middleware(
 
 app.include_router(resume.router, prefix="/api/resume", tags=["resume"])
 app.include_router(challenge.router, prefix="/api/challenge", tags=["challenge"])
+app.include_router(engine.router, prefix="/api/engine", tags=["engine"])
 
 @app.get("/")
 def read_root():

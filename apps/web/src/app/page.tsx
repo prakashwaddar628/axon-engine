@@ -1,56 +1,60 @@
-import ResumeBuilder from "@/components/ResumeBuilder";
 import DailyChallenge from "@/components/DailyChallenge";
+import SkillRadar from "@/components/SkillRadar";
+import ActiveSprint from "@/components/ActiveSprint";
+import Sidebar from "@/components/Sidebar";
 import { BrainCircuit } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6 md:p-10">
+    <main className="min-h-screen bg-transparent p-4 md:p-8">
+      {/* Background radial gradient for Deep Slate aesthetic */}
+      <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-background to-background" />
+
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <header className="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary/10 p-2 rounded-lg">
-                <BrainCircuit className="h-8 w-8 text-primary" />
+        <header className="flex items-center justify-between pb-6 border-b border-slate-800/50">
+          <div className="flex items-center gap-4">
+            <div className="bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+              <BrainCircuit className="h-8 w-8 text-emerald-400" />
             </div>
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">AXON</h1>
-                <p className="text-slate-500 dark:text-slate-400">Autonomous Career Engine v1.0</p>
+              <h1 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-sm font-sans">
+                AXON
+              </h1>
+              <p className="text-slate-400 text-sm font-mono tracking-wider">Autonomous Career Engine v1</p>
             </div>
           </div>
-          <div className="text-right hidden md:block">
-            <p className="text-sm font-medium">Welcome back, Prakash</p>
-            <p className="text-xs text-muted-foreground">Master Profile: Active</p>
+          <div className="text-right hidden md:block border border-slate-800/60 bg-slate-900/40 backdrop-blur-md px-4 py-2 rounded-full">
+            <p className="text-sm font-medium text-slate-200">Welcome, Prakash</p>
+            <p className="text-xs text-emerald-400 font-mono">Master Profile: Synced</p>
           </div>
         </header>
 
         {/* Dashboard Grid */}
-        <div className="grid lg:grid-cols-12 gap-8">
-          {/* Main Workspace (Resume Tailor) */}
-          <div className="lg:col-span-8 space-y-6">
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Tailor Engine</h2>
-            </div>
-            <ResumeBuilder />
+        <div className="grid lg:grid-cols-12 gap-6 items-start">
+
+          {/* Sidebar */}
+          <div className="lg:col-span-3 h-[calc(100vh-12rem)] sticky top-8">
+            <Sidebar />
           </div>
 
-          {/* Sidebar (Daily Challenge + Stats) */}
-          <div className="lg:col-span-4 space-y-6">
-            <h2 className="text-xl font-semibold">Daily Intelligence</h2>
-            <DailyChallenge />
-            
-            {/* Placeholder for future Stats component */}
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-                <h3 className="font-semibold mb-2">Application Stats</h3>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex justify-between">
-                        <span>Resumes Tailored</span>
-                        <span className="font-medium text-foreground">12</span>
-                    </div>
-                    <div className="flex justify-between">
-                        <span>Challenges Solved</span>
-                        <span className="font-medium text-foreground">8</span>
-                    </div>
-                </div>
+          {/* Main Dashboard Workspace */}
+          <div className="lg:col-span-9 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Top: Skill Radar */}
+              <div className="h-[420px]">
+                <SkillRadar />
+              </div>
+
+              {/* Daily Challenge Card replacing old large format */}
+              <div className="h-[420px] flex flex-col">
+                <DailyChallenge />
+              </div>
+            </div>
+
+            {/* Bottom: Active Sprint */}
+            <div>
+              <ActiveSprint />
             </div>
           </div>
         </div>
