@@ -23,11 +23,17 @@ def mock_market_trends():
         "Strict ATS systems rejecting generic resumes."
     ]
 
-@router.get("/analyze")
-async def analyze_profile():
+@router.post("/analyze")
+async def analyze_profile(data: dict):
     try:
-        master_profile = load_master_profile()
-        trends = mock_market_trends()
+        master_profile = data.get("profile", {})
+        trends = data.get("trends", [
+            "High demand for AI Agents and RAG applications.",
+            "Serverless and edge computing growing in popularity.",
+            "Increased focus on web performance and Rust integration.",
+            "Strict ATS systems rejecting generic resumes."
+        ])
+        
         result = gemini_service.analyze_profile(master_profile, trends)
         
         # Merge with skill mapping for proficiency
@@ -38,4 +44,5 @@ async def analyze_profile():
         
         return result
     except Exception as e:
+        print(f"Engine Analyze Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))

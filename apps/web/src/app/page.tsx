@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import DailyChallenge from "@/components/DailyChallenge";
 import SkillRadar from "@/components/SkillRadar";
 import ActiveSprint from "@/components/ActiveSprint";
@@ -5,6 +9,26 @@ import Sidebar from "@/components/Sidebar";
 import { BrainCircuit } from "lucide-react";
 
 export default function Home() {
+  const router = useRouter();
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("axon_user_profile");
+    if (!stored) {
+      router.push("/onboarding");
+    } else {
+      setProfile(JSON.parse(stored));
+      setLoading(false);
+    }
+  }, [router]);
+
+  if (loading) return (
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-emerald-500"></div>
+    </div>
+  );
+
   return (
     <main className="min-h-screen bg-transparent p-4 md:p-8">
       {/* Background radial gradient for Deep Slate aesthetic */}
@@ -21,12 +45,12 @@ export default function Home() {
               <h1 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-sm font-sans">
                 AXON
               </h1>
-              <p className="text-slate-400 text-sm font-mono tracking-wider">Autonomous Career Engine v1</p>
+              <p className="text-slate-400 text-sm font-mono tracking-wider">Autonomous Career Agent v1</p>
             </div>
           </div>
           <div className="text-right hidden md:block border border-slate-800/60 bg-slate-900/40 backdrop-blur-md px-4 py-2 rounded-full">
-            <p className="text-sm font-medium text-slate-200">Welcome, Prakash</p>
-            <p className="text-xs text-emerald-400 font-mono">Master Profile: Synced</p>
+            <p className="text-sm font-medium text-slate-200">Welcome, {profile?.name || "Strategist"}</p>
+            <p className="text-xs text-emerald-400 font-mono">Neural Sync: Active</p>
           </div>
         </header>
 
