@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { BrainCircuit, Rocket, User, Settings2 } from "lucide-react";
+import { BrainCircuit, Rocket, Sparkles, ShieldCheck, Cpu } from "lucide-react";
 
 export default function OnboardingPage() {
     const router = useRouter();
@@ -21,8 +20,6 @@ export default function OnboardingPage() {
     });
 
     const handleSave = () => {
-        // In a real app, this would call a Server Action to save to a DB
-        // For now, we'll store in localStorage to simulate persistence
         const formattedProfile = {
             ...profile,
             skills: profile.skills.split(",").map(s => s.trim()),
@@ -43,67 +40,79 @@ export default function OnboardingPage() {
     };
 
     return (
-        <main className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-4">
-            <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950" />
-            
-            <div className="max-w-2xl w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="text-center space-y-2">
-                    <div className="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 mb-4">
-                        <BrainCircuit className="h-10 w-10 text-emerald-400" />
+        <main className="min-h-screen bg-background relative overflow-hidden flex items-center justify-center p-6 selection:bg-primary/30 selection:text-white font-sans">
+            {/* Dynamic Mesh Background */}
+            <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse delay-700" />
+            </div>
+
+            <div className="max-w-3xl w-full space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                <div className="text-center space-y-4">
+                    <div className="inline-flex relative group">
+                        <div className="absolute -inset-4 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="h-20 w-20 glass rounded-[2rem] flex items-center justify-center border-white/10 relative z-10">
+                            <BrainCircuit className="h-10 w-10 text-primary shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+                        </div>
                     </div>
-                    <h1 className="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">
-                        Initiate AXON
-                    </h1>
-                    <p className="text-slate-400">Configure your autonomous career agent for maximum performance.</p>
+                    <div>
+                        <h1 className="text-5xl font-bold tracking-tight text-gradient mb-2">Initiate AXON</h1>
+                        <p className="text-slate-500 text-sm font-medium tracking-wide">Sync your neural profile to activate the autonomous career engine.</p>
+                    </div>
                 </div>
 
-                <Card className="bg-slate-900/50 backdrop-blur-xl border-slate-800 shadow-2xl">
-                    <CardHeader>
-                        <div className="flex justify-between items-center text-xs font-mono text-emerald-500 uppercase tracking-widest mb-2">
-                            <span>Step {step} of 2</span>
-                            <span>{step === 1 ? "Identity & Core" : "Project Arsenal"}</span>
+                <div className="glass rounded-[3rem] border-white/5 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-700">
+                    <div className="bg-white/5 px-10 py-6 border-b border-white/5 flex justify-between items-center">
+                        <div className="flex items-center gap-4">
+                            <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                                <Cpu className="h-4 w-4 text-primary" />
+                            </div>
+                            <div>
+                                <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] font-mono leading-none">Sync Protocol</h3>
+                                <p className="text-sm font-bold text-white mt-1">Step {step} of 2</p>
+                            </div>
                         </div>
-                        <CardTitle className="text-2xl">{step === 1 ? "Personal Context" : "Strategic Projects"}</CardTitle>
-                        <CardDescription className="text-slate-400">
-                            {step === 1 
-                                ? "Who are you? Tell AXON about your core identity and expertise." 
-                                : "Add your key technical achievements to build your intelligence base."}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
+                        <div className="flex gap-1.5">
+                            <div className={`h-1.5 w-6 rounded-full transition-all duration-500 ${step === 1 ? 'bg-primary' : 'bg-white/10'}`} />
+                            <div className={`h-1.5 w-6 rounded-full transition-all duration-500 ${step === 2 ? 'bg-primary' : 'bg-white/10'}`} />
+                        </div>
+                    </div>
+
+                    <div className="p-10 space-y-8">
                         {step === 1 ? (
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="name">Full Name</Label>
+                            <div className="space-y-8 animate-in slide-in-from-right-4 duration-500">
+                                <div className="space-y-3">
+                                    <Label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono ml-1">Identity Node</Label>
                                     <Input 
-                                        id="name" 
-                                        placeholder="Tony Stark" 
-                                        className="bg-slate-950/50 border-slate-800" 
+                                        placeholder="Enter your full name..." 
+                                        className="h-14 glass bg-white/5 border-white/10 rounded-2xl px-6 font-medium text-white focus:ring-primary/20 focus:border-primary/40 transition-all"
                                         value={profile.name}
                                         onChange={(e) => setProfile({...profile, name: e.target.value})}
                                     />
                                 </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="skills">Core Skills (comma separated)</Label>
+                                <div className="space-y-3">
+                                    <Label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono ml-1">Expertise Matrix (Comma Separated)</Label>
                                     <Input 
-                                        id="skills" 
-                                        placeholder="React, Python, LLMs, RAG" 
-                                        className="bg-slate-950/50 border-slate-800" 
+                                        placeholder="React, Python, Machine Learning..." 
+                                        className="h-14 glass bg-white/5 border-white/10 rounded-2xl px-6 font-medium text-white focus:ring-primary/20 focus:border-primary/40 transition-all"
                                         value={profile.skills}
                                         onChange={(e) => setProfile({...profile, skills: e.target.value})}
                                     />
                                 </div>
                             </div>
                         ) : (
-                            <div className="space-y-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                            <div className="space-y-8 animate-in slide-in-from-right-4 duration-500 max-h-[450px] overflow-y-auto pr-4 custom-scrollbar">
                                 {profile.projects.map((proj, idx) => (
-                                    <div key={idx} className="p-4 rounded-xl border border-slate-800 bg-slate-950/30 space-y-4">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-2">
-                                                <Label>Project Name</Label>
+                                    <div key={idx} className="glass bg-white/5 p-8 rounded-[2rem] border-white/5 space-y-6 relative group">
+                                        <div className="absolute top-6 right-6 h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 opacity-40 group-hover:opacity-100 transition-opacity">
+                                            <Sparkles className="h-4 w-4 text-primary" />
+                                        </div>
+                                        <div className="grid md:grid-cols-2 gap-6">
+                                            <div className="space-y-3">
+                                                <Label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono ml-1">Project Name</Label>
                                                 <Input 
-                                                    placeholder="Project X" 
-                                                    className="bg-slate-950/50 border-slate-800" 
+                                                    placeholder="Laxpra Search..." 
+                                                    className="h-12 glass bg-white/5 border-white/10 rounded-xl px-4 text-slate-200"
                                                     value={proj.name}
                                                     onChange={(e) => {
                                                         const newProjs = [...profile.projects];
@@ -112,11 +121,11 @@ export default function OnboardingPage() {
                                                     }}
                                                 />
                                             </div>
-                                            <div className="space-y-2">
-                                                <Label>Tech Stack (comma separated)</Label>
+                                            <div className="space-y-3">
+                                                <Label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono ml-1">Tech Stack</Label>
                                                 <Input 
-                                                    placeholder="Next.js, FastAPI" 
-                                                    className="bg-slate-950/50 border-slate-800" 
+                                                    placeholder="Next.js, Tailwind..." 
+                                                    className="h-12 glass bg-white/5 border-white/10 rounded-xl px-4 text-slate-200"
                                                     value={proj.techStack}
                                                     onChange={(e) => {
                                                         const newProjs = [...profile.projects];
@@ -126,11 +135,11 @@ export default function OnboardingPage() {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label>Description</Label>
+                                        <div className="space-y-3">
+                                            <Label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono ml-1">Achievement Description</Label>
                                             <Textarea 
-                                                placeholder="What did you build?" 
-                                                className="bg-slate-950/50 border-slate-800" 
+                                                placeholder="Briefly describe your high-alpha project..." 
+                                                className="glass bg-white/5 border-white/10 rounded-xl p-4 text-slate-300 min-h-[100px] resize-none"
                                                 value={proj.description}
                                                 onChange={(e) => {
                                                     const newProjs = [...profile.projects];
@@ -143,29 +152,35 @@ export default function OnboardingPage() {
                                 ))}
                                 <Button 
                                     variant="outline" 
-                                    className="w-full border-dashed border-slate-700 hover:border-emerald-500/50 text-slate-400"
+                                    className="w-full h-14 rounded-2xl border-dashed border-white/10 hover:border-primary/40 hover:bg-primary/5 text-slate-500 transition-all"
                                     onClick={addProject}
                                 >
-                                    + Add Another Project
+                                    + Integrate Project Node
                                 </Button>
                             </div>
                         )}
-                    </CardContent>
-                    <CardFooter className="flex justify-between border-t border-slate-800/50 pt-6">
-                        {step > 1 && (
-                            <Button variant="ghost" onClick={() => setStep(step - 1)}>
-                                Back
+                    </div>
+
+                    <div className="px-10 py-8 bg-white/5 border-t border-white/5 flex justify-between items-center backdrop-blur-3xl">
+                        {step > 1 ? (
+                            <Button variant="ghost" className="text-slate-500 hover:text-white rounded-xl" onClick={() => setStep(step - 1)}>
+                                Revert Protocol
                             </Button>
+                        ) : (
+                            <div className="flex items-center gap-2 text-slate-600">
+                                <ShieldCheck className="h-4 w-4" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Secure Sync Verified</span>
+                            </div>
                         )}
                         <Button 
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white ml-auto"
+                            className="h-14 px-8 bg-white text-black hover:bg-white/90 rounded-2xl font-bold transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] ml-auto"
                             onClick={() => step === 1 ? setStep(2) : handleSave()}
                         >
-                            {step === 1 ? "Next: Strategic Experience" : "Finalize Neural Sync"}
-                            {step === 2 && <Rocket className="ml-2 h-4 w-4" />}
+                            {step === 1 ? "Next Step" : "Initialize Neural Engine"}
+                            <Rocket className="ml-2 h-4 w-4" />
                         </Button>
-                    </CardFooter>
-                </Card>
+                    </div>
+                </div>
             </div>
         </main>
     );
